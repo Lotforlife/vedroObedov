@@ -1,0 +1,82 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    meta(name='viewport', content='width=device-width,initial-scale=1')
+
+    title
+      block title
+      |  - #{appName}
+
+    link(rel='icon', href='/img/favicon.ico', type='image/x-ico')
+    link(rel='shortcut icon', href='/img/favicon.ico', type='image/vnd.microsoft.icon')
+    != css('vendor/bootstrap/css/bootstrap')
+    != css('vendor/bootstrap/css/bootstrap-responsive')
+    != css('style')
+
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js")
+
+    // if lte IE 9
+      !css('style-ie9-lte')
+
+    //if lt IE 9
+      script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')
+    
+  body
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container
+          button(type='button', class='btn btn-navbar', data-toggle='collapse', data-target='.nav-collapse')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+        
+          a.brand(href='/') Vedro Obedov
+          
+          .nav-collapse.collapse
+          
+            if req.user
+              div.navbar-text.pull-right.dropdown.userMenu
+                a(type="button", role="button", class="dropdown-toggle marL", data-toggle="dropdown", href="#") #{req.user.username}
+                ul.dropdown-menu.pull-right( role='menu', aria-labelledby='dropdownMenu')
+                  if req.user._id
+                    li
+                      a(tabindex='-1', href='/users/#{req.user._id}/edit') Edit
+                  else
+                    if req.user.provider == 'vkontakte'
+                      li
+                        a(tabindex='-1', style="color: #999") Logged from VKontakte
+                    else if req.user.provider == 'facebook'
+                      li
+                        a(tabindex='-1', style="color: #999") Logged from FaceBook
+                    else if req.user.provider == 'google'
+                      li
+                        a(tabindex='-1', style="color: #999") Logged from Google
+                  li.divider
+                  li
+                    a(tabindex='-1', href='/logout') Выйти
+              p.navbar-text.pull-right
+                | Welcome,
+            else
+              p.navbar-text.pull-right
+                a(href='/login')  Войти
+                a.marL(href='/users/new') Регистрация
+            ul.nav
+              li
+                a(href='/') Меню
+                
+              if req.user
+                li
+                  a(href='/users/') Заказы
+                li
+                  a(href='/articles/') Истоия заказов
+                li
+                  a(href='/articles/') Заявки
+
+    .container
+      block content
+
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js")
+    != js('vendor/bootstrap')

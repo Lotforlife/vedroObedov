@@ -1,0 +1,45 @@
+extends base
+
+block title
+  | System users
+
+block main
+  h2 System users
+
+  if message != ''
+    .alert.alert-notice
+      a.close(data-dismiss="alert", href="javascript:void(0)") x
+      | #{message}
+
+  table.table.table-striped
+    tr
+      th Name
+      th Username
+      th Email
+      th Created
+    each user in users
+      tr
+        td
+          div.pull-left.dropdown
+            a(type="button", role="button", class="dropdown-toggle marL", data-toggle="dropdown", href="#") #{user.name}
+            ul.dropdown-menu.pull-left( role='menu', aria-labelledby='dropdownMenu')
+              li Name:
+                p=user.name
+              li.divider
+              li Second name:
+                p= user.lastName
+              li.divider
+              li Birth:
+                p=user.birth
+              li.divider
+              li Username:
+                p= user.username
+              li.divider
+              li E-mail:
+                p=user.email
+              li.divider
+              li Last change:
+                p= user.created.toDateString()
+        td= user.username
+        td= user.email
+        td= user.created.toDateString()
