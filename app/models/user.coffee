@@ -79,25 +79,4 @@ UserSchema.statics =
     .exec(cb)
     return
 
-#
-# Eda schema
-#
-EdaSchema = new Schema
-  name:
-    type: String
-    required: true
-  money:
-    type: String
-    required: true
-  number:
-    type: String
-    required: true
-
-#EdaSchema.statics =
-#  list: (cb) ->
-#    this.find()
-#    .exec(cb)
-#    return
-
 User = mongoose.model 'User', UserSchema
-Eda = mongoose.model 'Eda', EdaSchema
