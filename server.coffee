@@ -1,8 +1,3 @@
-
-###
-Form5 Node.js Express Skeleton
-Based on https://github.com/madhums/nodejs-express-mongoose-demo
-###
 express = require("express")
 http = require("http")
 fs = require("fs")
@@ -16,7 +11,7 @@ config = require("./config/environment")[env]
 auth = require("./config/middlewares/authorization")
 
 # Bootstrap database
-mongoose.connect('mongodb://localhost/skeleton');
+mongoose.connect('mongodb://localhost/vedroObedov');
 db = mongoose.connection
 
 db.once "open", callback = ->

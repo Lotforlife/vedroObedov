@@ -87,4 +87,11 @@ module.exports = (app, passport, auth) ->
 
   app.param 'articleId', articles.article
 
+  # Dinner routes
+
+  dinners = require '../app/controllers/dinners'
+
+  app.get '/menu', dinners.menu
+  app.post '/menu', dinners.add
+
   return
