@@ -4,37 +4,6 @@ block title
   | System users
 
 block main
-<<<<<<< HEAD:app/views/users/index_err.jade
-    h2 Заказать
-    if message != ''
-        .alert.alert-notice
-            a.close(data-dismiss="alert", href="javascript:void(0)") x
-            | #{message}
-    strong Частник:
-        ul
-            li +7-904-4426474
-    strong Абсолют:
-        ul
-            li тел: 312-112
-            li тел/факс: 312-480
-    table.table.table-striped
-        caption
-            | Заказ для
-            strong Абсолют
-        tr
-            th Стол №
-            th Имя
-            th Блюдо
-            th Кол-во
-            th Время
-        each order in orders
-            tr
-                td( rowspan=3)= order.table
-                td= order.username
-                td= order.dish
-                td= order.quantity
-                td= order.time
-=======
   h2 System users
 
   if message != ''
@@ -74,4 +43,3 @@ block main
         td= user.username
         td= user.email
         td= user.created.toDateString()
->>>>>>> 608aa92c041307a639cf6a01b8b57b4180f5a4bf:app/views/users/index.jade

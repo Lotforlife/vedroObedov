@@ -24,9 +24,9 @@ OrderSchema = new Schema
     required: true
     #default: 1
   time:
-    type: Date
+    type: String
     #required: true
-    default: Date.now
+    #default: Date.now
 
 OrderSchema.statics =
   list: (cb) ->

@@ -1,6 +1,6 @@
 extends base
 block content
-
+  .container
     form(action=action, method='post')
 
         p
@@ -24,7 +24,7 @@ block content
         p
             label time
                 br
-                input.input(name='time', type='text', placeholder='time' value= Date.now)
+                input.input(name='time', type='text', placeholder='time')
         p
             br
             button.btn.btn-primary(type='submit') Save user
