@@ -65,7 +65,6 @@ module.exports = (app, passport, auth) ->
   app.get '/logout', users.logout
 
   app.get '/users', auth.requiresLogin, users.index
-  app.get '/order', auth.requiresLogin, order.index
   app.get '/users/new', users.new
 
   app.post '/users', users.create
@@ -95,4 +94,11 @@ module.exports = (app, passport, auth) ->
   app.get '/menu', dinners.menu
   app.post '/menu', dinners.add
 
+
+  # Order routes
+
+  orders = require '../app/controllers/orders'
+  app.get '/order', auth.requiresLogin, orders.index
+  app.post '/order/new', auth.requiresLogin, orders.add
+  app.get '/order/new', auth.requiresLogin, orders.new
   return

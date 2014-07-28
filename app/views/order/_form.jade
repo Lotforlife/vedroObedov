@@ -1,0 +1,30 @@
+extends base
+block content
+
+    form(action=action, method='post')
+
+        p
+            label Table*
+                br
+                input(name='table', type='text', placeholder='table')
+        p
+            label Username*
+                br
+                input(name='username', type='text', placeholder='username')
+        p
+            label dish*
+                br
+                input(name='dish', type='text', placeholder='dish')
+
+        p
+            label quantity*
+                br
+                input.input(name='quantity', type='text', placeholder='quantity')
+
+        p
+            label time
+                br
+                input.input(name='time', type='text', placeholder='time' value= Date.now)
+        p
+            br
+            button.btn.btn-primary(type='submit') Save user

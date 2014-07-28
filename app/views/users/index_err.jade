@@ -14,19 +14,20 @@ block main
         ul
             li тел: 312-112
             li тел/факс: 312-480
-    | Заказ для
-    strong Абсолют
     table.table.table-striped
+        caption
+            | Заказ для
+            strong Абсолют
         tr
             th Стол №
             th Имя
             th Блюдо
             th Кол-во
             th Время
-        each dinner in dinners
+        each order in orders
             tr
-                td( rowspan=3)= dinner.table
-                td= dinner.username
-                td= dinner.dish
-                td= dinner.quantity
-                td= dinner.time
+                td( rowspan=3)= order.table
+                td= order.username
+                td= order.dish
+                td= order.quantity
+                td= order.time

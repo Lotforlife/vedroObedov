@@ -6127,6 +6127,7 @@ a.badge:focus {
   line-height: 1;
   letter-spacing: -1px;
   color: inherit;
+    text-align: center;
 }
 
 .hero-unit li {
@@ -6163,4 +6164,7 @@ a.badge:focus {
 
 .marL{
   margin-left: 10px;
+}
+table.table.table-striped>caption{
+    text-align: left;
 }
