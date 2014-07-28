@@ -1,59 +1,60 @@
 extends base
 
 block content
-  - var action = '/users'
-  if (!user.isNew)
-    - action += '/'+user.id
-
-
-  if message != ''
-    .alert.alert-error= message
-
-  form(action=action, method='post')
-
-    if(!user.isNew)
-      input(type='hidden', name='_method', value='put')
-
-    p
-      label Username*
-        br
-        input(name='username', type='text', value=user.username)
-    p
-      label Email*
-        br
-        input(name='email', type='text', value=user.email)
-    p
-      label Password*
-        br
-        input(name='password', type='password', placeholder='password')
-
-    p
-      label Name*
-        br
-        input.input(name='name', type='text', value=user.name)
-
-    p
-      label Last name
-        br
-        input.input(name='lastName', type='text', value=user.lastName)
-
-    p
-      label Date of birth
-        br
-        input.input(name='birth', type='text', value=user.birth)
-
-    p
-      label Photo
-        br
-        input(name='photo', type='text')
-        input.photo( type="file" style="color: #8e8e8e; padding: 5px 2px 5px 0px;background:  no-repeat scroll 5% 50%;")
-
-    p
-      br
-      button.btn.btn-primary(type='submit') Save user
-
   .container
-    div.authorization Sign in with:<br />
-      a.fb(href="/fb") FaceBook<br />
-      a.google(href="/google") Google<br />
-      a.vk(href="/vk") VKontakte<br />
+    - var action = '/users'
+    if (!user.isNew)
+      - action += '/'+user.id
+
+
+    if message != ''
+      .alert.alert-error= message
+
+    form(action=action, method='post')
+
+      if(!user.isNew)
+        input(type='hidden', name='_method', value='put')
+
+      p
+        label Username*
+          br
+          input(name='username', type='text', value=user.username)
+      p
+        label Email*
+          br
+          input(name='email', type='text', value=user.email)
+      p
+        label Password*
+          br
+          input(name='password', type='password', placeholder='password')
+
+      p
+        label Name*
+          br
+          input.input(name='name', type='text', value=user.name)
+
+      p
+        label Last name
+          br
+          input.input(name='lastName', type='text', value=user.lastName)
+
+      p
+        label Date of birth
+          br
+          input.input(name='birth', type='text', value=user.birth)
+
+      p
+        label Photo
+          br
+          input(name='photo', type='text')
+          input.photo( type="file" style="color: #8e8e8e; padding: 5px 2px 5px 0px;background:  no-repeat scroll 5% 50%;")
+
+      p
+        br
+        button.btn.btn-primary(type='submit') Save user
+
+    .container
+      div.authorization Sign in with:<br />
+        a.fb(href="/fb") FaceBook<br />
+        a.google(href="/google") Google<br />
+        a.vk(href="/vk") VKontakte<br />

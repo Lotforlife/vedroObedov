@@ -1,62 +1,125 @@
 extends base
 
 block title
-  | System users
+  | Меню
 
 block main
-  h2 Menu
+
+  script
+    :coffeescript
+      $(document).ready ->
+        $("#menuTable .rowEda").each (i) ->
+          number = i + 1
+          $(this).find("td:first").text number
+          return
+
+        $('#jadnost').on 'click', ->
+          alert("Не треснет?")
+          return
+
+        randTitle = ""
+        randMoney = ""
+        randType = ""
+
+        arrTitle = ['q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m']
+        arrMoney = [1,2,3,4,5,6,7,8,9,0]
+        arrType = ["салат","первое","второе","гарнир","прочее"]
+
+        randomEda = ->
+          i = 0
+          while i < 5
+            randT = Math.round( Math.random() * 26)
+            randTitle += arrTitle[randT]
+            $('#addTitle').val(randTitle)
+            i++
+
+          i = 0
+          while i < 3
+            randM = Math.round( Math.random() * 10)
+            randMoney += arrMoney[randM]
+            $('#addMoney').val(randMoney)
+            i++
+
+          rand = Math.round( Math.random() * 5)
+          randType += arrType[rand]
+          $('#addType').val(randType)
+
+        randomEda()
+        return
+
+
 
   if message != ''
-    .alert.alert-notice
-      a.close(data-dismiss="alert", href="javascript:void(0)") x
-      | #{message}
+      .alert.alert-notice
+        a.close(data-dismiss="alert", href="javascript:void(0)") x
+        | #{message}
 
-  form(action=action, method='post') Добавить
-    p
-      label Название
-        br
-        input(name='title', type='text', value="sup")
-    p
-      label Цена
-        br
-        input(name='money', type='text', value="123")
-    p
-      label Тип ( salat || first || second || other )
-        br
-        input(name='type', type='text', value="salat")
-    p
-      br
-      button.btn.btn-primary(type='submit') Дбавить блюдо
+    div.container-fluid
+      div.row-fluid( id="blockContent")
 
-  //table.table.table-striped
-  //  tr
-  //    th Name
-  //    th Username
-  //    th Email
-  //    th Created
-  //  each eda in edas
-  //    tr
-  //      td
-  //        div.pull-left.dropdown
-  //          a(type="button", role="button", class="dropdown-toggle marL", data-toggle="dropdown", href="#") #{user.name}
-  //          ul.dropdown-menu.pull-left( role='menu', aria-labelledby='dropdownMenu')
-  //            li Name:
-  //              p=user.name
-  //            li.divider
-  //            li Second name:
-  //              p= user.lastName
-  //            li.divider
-  //            li Birth:
-  //              p=user.birth
-  //            li.divider
-  //            li Username:
-  //              p= user.username
-  //            li.divider
-  //            li E-mail:
-  //              p=user.email
-  //            li.divider
-  //            li Last change:
-  //              p= user.created.toDateString()
-  //      td= user.username
-  //      td= user.email
-  //      td= user.created.toDateString()
+        div.span2(data-spy="scroll")
+          div(id="navTags",lass="", style="position: fixed;")
+            ul(class="nav nav-pills nav-stacked")
+              li
+                a(href="#salat") Салат
+              li
+                a(href="#first") Первое
+              li
+                a(href="#second") Второе
+              li
+                a(href="#garnir") Гарнир
+              li
+                a(href="#other") Прочее
+
+        div.span10
+          div.hero-unit
+            h1 Меню на #{dateShortMon(new Date())}
+            p
+            p Меню для Абсолют
+
+          form(action='/order', method='post', class="form-horizontal")
+            table.table.table-bordered#menuTable
+              tr
+                th №
+                th Название
+                th Цена
+                th Заказать
+                  br
+                  span(style="padding-bottom: 0px; margin-bottom: 0px; color: #A0A0A0")
+                    input#jadnost(type="checkbox", style="float: left")
+                    p(style="text-align: left; font-size: 11px")
+                      | Заказать всё
+                if req.user.username == "admin"
+                  th Удалить *admin
+
+              each eda in edas
+                tr.rowEda
+                  td
+                  td= eda.title
+                  td= eda.money
+                  td
+                    input(name="check", type="checkbox", value=eda.title)
+                  if req.user.username == "admin"
+                    td
+                      a.delEda(href="/delEda/#{eda._id}/del") X
+            button.btn.btn-primary(type='submit') Заказать
+
+          if req.user.username == "admin"
+            div(style="background-color: #cdcdcd; width: 400px; padding: 30px; margin: 30px")
+              form(action='/menu', method='post')
+                h2 Добавить еду *admin
+                p
+                  label Название
+                    br
+                    input#addTitle(name='title', type='text', value=randTitle)
+                p
+                  label Цена
+                    br
+                    input#addMoney(name='money', type='text', value="123")
+                p
+                  label Тип ( salat || first || second || garnir || other )
+                    br
+                    input#addType(name='type', type='text', value="salat")
+                p
+                  br
+                  button#addEda.btn.btn-primary(type='submit') Дoбавить блюдо

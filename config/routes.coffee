@@ -61,10 +61,15 @@ module.exports = (app, passport, auth) ->
 #
 #
 #
-
+  bids = require '../app/controllers/bids'
+  app.get '/bids', auth.requiresLogin, bids.index
   app.get '/logout', users.logout
 
   app.get '/users', auth.requiresLogin, users.index
+<<<<<<< HEAD
+=======
+ # app.get '/order', auth.requiresLogin, order.index
+>>>>>>> 608aa92c041307a639cf6a01b8b57b4180f5a4bf
   app.get '/users/new', users.new
 
   app.post '/users', users.create
@@ -92,7 +97,12 @@ module.exports = (app, passport, auth) ->
   dinners = require '../app/controllers/dinners'
 
   app.get '/menu', dinners.menu
-  app.post '/menu', dinners.add
+  app.post '/menu', auth.requiresLogin, dinners.add
+  app.get '/delEda/:edaId/del', auth.requiresLogin, dinners.delEda
+
+  app.param 'edaId', dinners.findId
+
+  app.post '/order', dinners.order
 
 
   # Order routes
