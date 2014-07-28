@@ -66,10 +66,7 @@ module.exports = (app, passport, auth) ->
   app.get '/logout', users.logout
 
   app.get '/users', auth.requiresLogin, users.index
-<<<<<<< HEAD
-=======
- # app.get '/order', auth.requiresLogin, order.index
->>>>>>> 608aa92c041307a639cf6a01b8b57b4180f5a4bf
+
   app.get '/users/new', users.new
 
   app.post '/users', users.create
