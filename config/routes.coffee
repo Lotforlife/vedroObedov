@@ -61,7 +61,8 @@ module.exports = (app, passport, auth) ->
 #
 #
 #
-
+  bids = require '../app/controllers/bids'
+  app.get '/bids', auth.requiresLogin, bids.index
   app.get '/logout', users.logout
 
   app.get '/users', auth.requiresLogin, users.index
