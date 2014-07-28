@@ -16,7 +16,7 @@ block content
      h3= bid.title
     .row-fluid
      .span2
-      p= req.user.name
+      p= req.bid.users
       p= bid.createdAt
      .span10
       p= bid.body
@@ -30,12 +30,16 @@ block content
      button.btn
       a(href="/bids/#{bid.id}/destroy") Закрыть заявку
     if req.bid.username == req.user.username
-     .row-fluid
-      .span12
-       h3 Удалить заявку
-       .row-fluid
+     if req.bid.status !== "В работе"
+      .row-fluid
+       .span12
+        h3 Удалить заявку
+        .row-fluid
          .span2
           legend(style="font-size: 12px") Комментарий
           button.btn(type="submit") Удалить
          .span10
           textarea.input-xlarge(rows="4" cols="40" style="margin-left: 19px")
+     else
+      h4 
+       Ваша заявка обрабатывается
