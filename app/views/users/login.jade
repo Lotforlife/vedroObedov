@@ -4,26 +4,27 @@ block title
   | Login
 
 block content
-  h2 Please log in
-
-  if message != ''
-    .alert.alert-error= message
-
-  form(action='/login', method='post')
-
-    p
-      label(for='username') Username<br />
-      input#username(name='username', type='text')
-
-    p
-      label(for='password') Password<br />
-      input#password(name='password', type='password')
-  
-    p
-      input.btn.btn-primary(type='submit', value='Log in')
-
   .container
-    div.authorization Sign in with:<br />
-      a.fb(href="/fb") FaceBook<br />
-      a.google(href="/google") Google<br />
-      a.vk(href="/vk") VKontakte<br />
+    h2 Please log in
+
+    if message != ''
+      .alert.alert-error= message
+
+    form(action='/login', method='post')
+
+      p
+        label(for='username') Username<br />
+        input#username(name='username', type='text')
+
+      p
+        label(for='password') Password<br />
+        input#password(name='password', type='password')
+
+      p
+        input.btn.btn-primary(type='submit', value='Log in')
+
+    .container
+      div.authorization Sign in with:<br />
+        a.fb(href="/fb") FaceBook<br />
+        a.google(href="/google") Google<br />
+        a.vk(href="/vk") VKontakte<br />

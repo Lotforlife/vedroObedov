@@ -1,32 +1,45 @@
 extends base
+
 block title
-    | Order
+  | System users
+
 block main
-    h2 Заказать
-    if message != ''
-        .alert.alert-notice
-            a.close(data-dismiss="alert", href="javascript:void(0)") x
-            | #{message}
-    strong Частник:
-        ul
-            li +7-904-4426474
-    strong Абсолют:
-        ul
-            li тел: 312-112
-            li тел/факс: 312-480
-    | Заказ для
-    strong Абсолют
-    table.table.table-striped
-        tr
-            th Стол №
-            th Имя
-            th Блюдо
-            th Кол-во
-            th Время
-        each dinner in dinners
-            tr
-                td( rowspan=3)= dinner.table
-                td= dinner.username
-                td= dinner.dish
-                td= dinner.quantity
-                td= dinner.time
+  h2 System users
+
+  if message != ''
+    .alert.alert-notice
+      a.close(data-dismiss="alert", href="javascript:void(0)") x
+      | #{message}
+
+  table.table.table-striped
+    tr
+      th Name
+      th Username
+      th Email
+      th Created
+    each user in users
+      tr
+        td
+          div.pull-left.dropdown
+            a(type="button", role="button", class="dropdown-toggle marL", data-toggle="dropdown", href="#") #{user.name}
+            ul.dropdown-menu.pull-left( role='menu', aria-labelledby='dropdownMenu')
+              li Name:
+                p=user.name
+              li.divider
+              li Second name:
+                p= user.lastName
+              li.divider
+              li Birth:
+                p=user.birth
+              li.divider
+              li Username:
+                p= user.username
+              li.divider
+              li E-mail:
+                p=user.email
+              li.divider
+              li Last change:
+                p= user.created.toDateString()
+        td= user.username
+        td= user.email
+        td= user.created.toDateString()

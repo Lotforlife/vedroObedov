@@ -3,31 +3,39 @@ extends base
 block title
     | Order
 block main
-    h2 Заказать
+    //h2 Заказать
+    div.hero-unit
+        h1 Оформление заказа
     if message != ''
         .alert.alert-notice
             a.close(data-dismiss="alert", href="javascript:void(0)") x
             | #{message}
-    strong Частник:
-        ul
-            li +7-904-4426474
-    strong Абсолют:
-        ul
-            li тел: 312-112
-            li тел/факс: 312-480
-    | Заказ для
-        strong Абсолют
+    h4 Частник:
+    ul
+        li +7-904-4426474
+    h4 Абсолют:
+    ul
+        li тел: 312-112
+        li тел/факс: 312-480
     table.table.table-striped
+        caption
+            | Заказ для
+            strong  Абсолют
         tr
             th Стол №
             th Имя
             th Блюдо
             th Кол-во
             th Время
-        each dinner in dinners
+        each order in orders
             tr
-                td( rowspan=3)= dinner.table
-                td= dinner.username
-                td= dinner.dish
-                td= dinner.quantity
-                td= dinner.time
+                td= order.table
+                td= order.username
+                td= order.dish
+                td= order.quantity
+                td= order.time
+    br
+    a(href='/order/new') New Order
+    //script(
+        src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
+    //!= js('vendor/table')

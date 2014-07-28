@@ -16,4 +16,4 @@ module.exports = (app) ->
   moment = require 'moment'
   
   app.locals.dateShortMon = (date) ->
-    return moment(date).format 'MMM DD'
+    return moment(date).format 'DD MMM'
