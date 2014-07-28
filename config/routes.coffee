@@ -60,9 +60,17 @@ module.exports = (app, passport, auth) ->
     return
 #
 #
-#
+# Bids routes
   bids = require '../app/controllers/bids'
-  app.get '/bids', auth.requiresLogin, bids.index
+  app.get '/bids', auth.requiresLogin, bids.manage
+  app.get '/bids/open', auth.requiresLogin, bids.open
+  app.post '/bids', bids.new
+  app.get '/bids/:bidId/edit', auth.requiresLogin, bids.edit
+  app.post '/bids/edit', bids.work
+  app.put '/bids/:bidId', auth.requiresLogin, bids.work
+  app.get '/bids/:bidId/destroy', auth.requiresLogin, bids.destroy
+
+  app.param 'bidId', bids.bid
   app.get '/logout', users.logout
 
   app.get '/users', auth.requiresLogin, users.index

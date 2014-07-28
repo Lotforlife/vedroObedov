@@ -1,0 +1,29 @@
+extends ../layout
+
+block title
+  | New bid
+
+block prepend content
+
+  .container-fluid
+   .row-fluid
+    .span10
+     .row-fluid
+      .span12
+       .page-header
+        h1 Система заявок
+        h1
+         small Открыть новую заявку
+     form(action="/bids", method="post")
+      .row-fluid
+       .span2
+        legend Название
+       .span10
+        input.input-xlarge(name="title" type="text" placeholder="Название")
+      .row-fluid
+       .span2
+        legend Текст заявки
+       .span10
+        textarea.input-xxlarge(rows="6" cols="40" type="text" placeholder="Текст заявки" name="body")
+       .lol
+        input.btn.btn-primary(type="submit" value="Отправить заявку")

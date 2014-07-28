@@ -18,3 +18,10 @@ block content
               b Published
               br
               != dateShortMon(bid.createdAt)
+
+            p 
+              b Posted in
+              br
+              | #{bid.users}
+        .span10
+          != marked(bid.body)

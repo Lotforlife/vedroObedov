@@ -1,0 +1,36 @@
+extends base
+
+block title
+  | Manage bids
+
+block main
+  h2 Система заявок
+  h1
+   small Система заявок создана для НАС, мы можем создавать заявки по нашим запросам/нуждам
+  if message != ''
+    .alert.alert-notice
+      a.close(data-dismiss="alert", href="javascript:void(0)") x
+      | #{message}
+  .span10    
+   ul.nav.nav-tabs
+    li 
+      a(href="#") Все
+    li 
+      a(href="#") В ожидании
+    li 
+      a(href="#") В работе
+    li 
+      a(href="#") Выполненные
+  table.table.table-striped
+    tr
+      th Статус
+      th Название
+      th Создана
+      th Пользователь
+    each bid in bids
+      tr
+        td= bid.status
+        td
+          a(href='/bids/#{bid.id}/edit')=bid.title
+        td= dateShortMon(bid.createdAt)
+        td= bid.users

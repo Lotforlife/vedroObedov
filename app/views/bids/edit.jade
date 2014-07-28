@@ -1,0 +1,40 @@
+extends ../layout
+
+block title
+  | Rule da bid
+
+block content
+  - var action = '/bids'
+  if (!bid.isNew)
+   - action += '/'+bid.id
+  .page-header
+   h2 Система заявок
+
+  .container
+    .span12
+     h3= bid.title
+    .row-fluid
+     .span2
+      p= req.user.name
+      p= bid.createdAt
+     .span10
+      p= bid.body
+    if req.user.username == "admin"
+     if req.bid.status !== "В работе"
+      form(action=action method="post")
+       if(!bid.isNew)
+        input(type='hidden', name='_method', value='put')
+       button.btn(type="submit")
+        Взять в работу
+     button.btn
+      a(href="/bids/#{bid.id}/destroy") Закрыть заявку
+    if req.bid.username == req.user.username
+     .row-fluid
+      .span12
+       h3 Удалить заявку
+       .row-fluid
+         .span2
+          legend(style="font-size: 12px") Комментарий
+          button.btn(type="submit") Удалить
+         .span10
+          textarea.input-xlarge(rows="4" cols="40" style="margin-left: 19px")
