@@ -94,6 +94,11 @@ module.exports = (app, passport, auth) ->
   dinners = require '../app/controllers/dinners'
 
   app.get '/menu', dinners.menu
-  app.post '/menu', dinners.add
+  app.post '/menu', auth.requiresLogin, dinners.add
+  app.get '/delEda/:edaId/del', auth.requiresLogin, dinners.delEda
+
+  app.param 'edaId', dinners.findId
+
+  app.post '/order', dinners.order
 
   return

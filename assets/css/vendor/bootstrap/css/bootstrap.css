@@ -6164,3 +6164,12 @@ a.badge:focus {
 .marL{
   margin-left: 10px;
 }
+
+#menuTable{
+    width: 800px;
+}
+
+#menuTable th{
+    text-align: center;
+}
+
