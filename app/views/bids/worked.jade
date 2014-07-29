@@ -29,6 +29,7 @@ block main
       th Создана
       th Пользователь
     each bid in bids
+     if bid.status == "В работе"
       tr
         td= bid.status
         td

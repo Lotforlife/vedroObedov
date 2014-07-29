@@ -1,0 +1,39 @@
+extends base
+
+block title
+  | Del bids
+
+block main
+  h2 Выполненные заявки
+  h1
+   small Система заявок создана для НАС, мы можем создавать заявки по нашим запросам/нуждам
+  if req.user.username == "admin"
+   .span8    
+    ul.nav.nav-tabs
+     li.all 
+       a(href="/bids") Активные
+     li.waiting 
+       a(href="/bids/wait") В ожидании
+     li.inwork 
+       a(href="/bids/work") В работе
+     li.complete 
+       a(href="/bids/complete") Выполненные
+     if req.user.username == "admin"
+      li.deleted
+       a(href="/bids/del") Удаленные
+   table.table.table-striped
+    tr
+      th Статус
+      th Название
+      th Удалена
+      th Пользователь
+      th Комментарий
+    each bidd in bidds
+     if bidd.status == "Закрыта"
+      tr
+        td= bidd.status
+        td
+          a(href='#')=bidd.title
+        td= bidd.closedAt
+        td= bidd.users
+        td= bidd.comment

@@ -4,6 +4,7 @@ block title
   | Rule da bid
 
 block content
+ .container
   - var action = '/bids'
   if (!bid.isNew)
    - action += '/'+bid.id
@@ -15,7 +16,7 @@ block content
      h3= bid.title
     .row-fluid
      .span2
-      p= req.user.name
+      p= req.bid.users
       p= bid.createdAt
      .span10
       p= bid.body
@@ -26,15 +27,24 @@ block content
         input(type='hidden', name='_method', value='put')
        button.btn(type="submit")
         Взять в работу
-     button.btn
-      a(href="/bids/#{bid.id}/destroy") Закрыть заявку
+     form(action='/bids/#{bid.id}/del' method="post")   
+      button.btn(type="submit") Закрыть заявку
     if req.bid.username == req.user.username
-     .row-fluid
-      .span12
-       h3 Удалить заявку
-       .row-fluid
-         .span2
-          legend(style="font-size: 12px") Комментарий
-          button.btn(type="submit") Удалить
-         .span10
-          textarea.input-xlarge(rows="4" cols="40" style="margin-left: 19px")
+     if req.bid.status !== "В работе"
+      .row-fluid
+       .span12
+        h3 Удалить заявку
+        .row-fluid
+         form(action="/bids/#{bid.id}/destroy" method="post")
+          .span2
+           legend(style="font-size: 12px") Комментарий
+           button.btn(type="submit") Удалить
+          .span10
+           textarea.input-xlarge(name="delform" rows="4" cols="40" style="margin-left: 19px")
+     else
+      h4 
+       Ваша заявка обрабатывается администратором
+    else
+     if req.bid.status == "В работе"
+      h4
+       Заявка обрабатывается администратором
