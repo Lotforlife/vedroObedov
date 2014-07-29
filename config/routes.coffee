@@ -107,13 +107,13 @@ module.exports = (app, passport, auth) ->
 
   app.param 'edaId', dinners.findId
 
-  app.post '/order', dinners.order
 
 
   # Order routes
 
   orders = require '../app/controllers/orders'
   app.get '/order', auth.requiresLogin, orders.index
+  app.post '/order', auth.requiresLogin, orders.add
   app.post '/order/new', auth.requiresLogin, orders.add
   app.get '/order/new', auth.requiresLogin, orders.new
 

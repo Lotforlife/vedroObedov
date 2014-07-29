@@ -6174,12 +6174,31 @@ table.table.table-striped>caption{
     width: 800px;
 }
 
-#menuTable th{
-    text-align: center;
+#menuTable tr{
+    text-align: left;
 }
 
+#logout{
+    margin-left: 15px;
+    color: #dddddd;
+}
+
+#logout:hover{
+    background: none;
+}
+
+#headTable th{
+    text-align: center;
+}
 .padd{
     padding-left: 30px;
     padding-right: 100px;
-    w
+}
+#miniBtn{
+    display: none;
+}
+
+#miniList li,
+#miniBtn{
+    margin-left: 25px;
 }
