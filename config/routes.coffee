@@ -68,7 +68,12 @@ module.exports = (app, passport, auth) ->
   app.get '/bids/:bidId/edit', auth.requiresLogin, bids.edit
   app.post '/bids/edit', bids.work
   app.put '/bids/:bidId', auth.requiresLogin, bids.work
-  app.get '/bids/:bidId/destroy', auth.requiresLogin, bids.destroy
+  app.post '/bids/:bidId/destroy', auth.requiresLogin, bids.destroy
+  app.get '/bids/del', auth.requiresLogin, bids.del
+  app.post '/bids/:bidId/del', bids.close
+  app.get '/bids/complete', auth.requiresLogin, bids.closed
+  app.get '/bids/work', auth.requiresLogin, bids.worked
+  app.get '/bids/wait', auth.requiresLogin, bids.wait
 
   app.param 'bidId', bids.bid
   app.get '/logout', users.logout

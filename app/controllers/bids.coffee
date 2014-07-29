@@ -2,7 +2,7 @@ mongoose = require 'mongoose'
 _ = require 'underscore'
 
 Bid = mongoose.model 'Bid'
-
+Bidd = mongoose.model 'Bidd'
 
 exports.index = (req, res) ->
   Bid.list (err, bids) ->
@@ -14,7 +14,7 @@ exports.manage = (req, res) ->
   Bid.list (err, bids) ->
     res.render 'bids/manage',
       bids: bids
-      message: req.flash 'notice'
+      message: req.flash 'error'
     return
 
 exports.open = (req, res) ->
@@ -67,6 +67,81 @@ exports.work = (req, res) ->
   return
 
 exports.destroy = (req, res) ->
-  bid = req.bid
-  bid.remove (err) ->
+  if req.body.delform == ""
+   req.flash 'error', 'Поле комментария обязательно к заполнению!'
+   res.redirect '/bids'
+#  bid = req.bid
+#  bid.remove (err) ->
+#    res.redirect '/bids'
+   return
+  else
+   bid = req.bid
+   bidd = new Bidd({
+    status: "Удалена юзером"
+    users: req.bid.users
+    body: req.bid.body
+    title: req.bid.title
+    createdAt: req.bid.createdAt
+    username: req.bid.username
+    comment: req.body.delform
+   })
+   bidd.save (err) ->
+    if err
+      res.redirect '/logout',
+        bidd:bidd
+        errors: err.errors
+    else
+      res.redirect '/bids'
+   , bid.remove (err) ->
     res.redirect '/bids'
+   res.redirect '/bids'
+   return
+
+exports.del = (req,res) ->
+  Bidd.list (err, bidds) ->
+    res.render 'bids/del',
+      bidds: bidds
+    return
+
+exports.close = (req,res) ->
+   bid = req.bid
+   bidd = new Bidd({
+    status: "Закрыта"
+    users: req.bid.users
+    body: req.bid.body
+    title: req.bid.title
+    createdAt: req.bid.createdAt
+    username: req.bid.username
+    comment: "Complete"
+   })
+   bidd.save (err) ->
+    if err
+      res.redirect '/logout',
+        bidd:bidd
+        errors: err.errors
+    else
+      res.redirect '/bids'
+   , bid.remove (err) ->
+    res.redirect '/bids'
+   res.redirect '/bids'
+   return
+
+exports.closed = (req,res) ->
+  Bidd.list (err, bidds) ->
+    res.render 'bids/closed',
+      bidds: bidds
+    return
+
+exports.worked = (req, res) ->
+  Bid.list (err, bids) ->
+    res.render 'bids/worked',
+      bids: bids
+      message: req.flash 'error'
+    return
+
+exports.wait = (req, res) ->
+  Bid.list (err, bids) ->
+    res.render 'bids/waiting',
+      bids: bids
+      message: req.flash 'error'
+    return
