@@ -8,15 +8,22 @@ block main
   script
     :coffeescript
       $(document).ready ->
+
+      #
+      #
         $("#menuTable .rowEda").each (i) ->
           number = i + 1
           $(this).find("td:first").text number
           return
 
+      #
+      #
         $('#jadnost').on 'click', ->
           alert("Не треснет?")
           return
 
+      #
+      #
         randTitle = ""
         randMoney = ""
         randType = ""
@@ -44,6 +51,45 @@ block main
           randType += arrType[rand]
           $('#addType').val(randType)
 
+      #
+      #
+        miniList = ->
+          sum = 0
+          arr = []
+
+          $('input[type = checkbox]').on 'click', ->
+
+            if this.checked
+              title = this.value.split(',')[0]
+              val2 = this.value.split(',')[1]
+              money = parseFloat(val2)
+
+
+              sum += money
+              arr.push('<li>' + title + '</li>')
+              console.log "arr", arr
+
+              $('#miniList').css('display', 'block')
+              $('#miniList ul').text('Заказ на сумму: ' + sum).append(arr)
+
+            else
+              title = this.value.split(',')[0]
+              val2 = this.value.split(',')[1]
+              money = parseFloat(val2)
+
+              sum -= money
+              $('#miniList ul').text('Заказ на сумму: ' + sum)
+              del = $.inArray("""<li>" + title + "</li>""" , arr)
+              arr.splice(del)
+              $('#miniList ul').text('Заказ на сумму: ' + sum).append(arr)
+
+            if (sum != 0)
+              $('#miniBtn').css("display", "block")
+            else
+              $('#miniList').css('display', 'none')
+              $('#miniBtn').css("display", "none")
+
+        miniList()
         randomEda()
         return
 
@@ -71,55 +117,118 @@ block main
               li
                 a(href="#other") Прочее
 
-        div.span10
+        div.span6
           div.hero-unit
-            h1 Меню на #{dateShortMon(new Date())}
+            h1(style="text-align: left") Меню на #{dateShortMon(new Date())}
             p
             p Меню для Абсолют
 
-          form(action='/order', method='post', class="form-horizontal")
-            table.table.table-bordered#menuTable
-              tr
-                th №
-                th Название
-                th Цена
-                th Заказать
-                  br
-                  span(style="padding-bottom: 0px; margin-bottom: 0px; color: #A0A0A0")
-                    input#jadnost(type="checkbox", style="float: left")
-                    p(style="text-align: left; font-size: 11px")
-                      | Заказать всё
-                if req.user.username == "admin"
-                  th Удалить *admin
+          div.span8
+            form.menuList(action='/order', method='post', class="form-horizontal")
+              table.table.table-bordered#menuTable
+                thead
+                  tr#headTable
+                    th №
+                    th Название
+                    th Цена
+                    th Заказать
+                    if req.user.username == "admin"
+                      th Удалить *admin
+                tbody
+                  tr#salat(style="border: solid 1px #000")
+                    th(colspan="5") Салат
+                    each eda in edas
+                      if eda.type == "салат"
+                        tr.rowEda
+                          td
+                          td= eda.title
+                          td= eda.money
+                          td(style="text-align: center")
+                            input(name="check", type="checkbox", value= [[eda.title],[eda.money]])
+                          if req.user.username == "admin"
+                            td(style="text-align: center")
+                              a.delEda(href="/delEda/#{eda._id}/del") X
 
-              each eda in edas
-                tr.rowEda
-                  td
-                  td= eda.title
-                  td= eda.money
-                  td
-                    input(name="check", type="checkbox", value=eda.title)
-                  if req.user.username == "admin"
-                    td
-                      a.delEda(href="/delEda/#{eda._id}/del") X
-            button.btn.btn-primary(type='submit') Заказать
+                  tr#first(style="border: solid 1px #000")
+                    th(colspan="5") Первое
+                    each eda in edas
+                      if eda.type == "первое"
+                        tr.rowEda
+                          td
+                          td= eda.title
+                          td= eda.money
+                          td(style="text-align: center")
+                            input(name="check", type="checkbox", value=[eda.title, eda.money])
+                          if req.user.username == "admin"
+                            td(style="text-align: center")
+                              a.delEda(href="/delEda/#{eda._id}/del") X
 
-          if req.user.username == "admin"
-            div(style="background-color: #cdcdcd; width: 400px; padding: 30px; margin: 30px")
-              form(action='/menu', method='post')
-                h2 Добавить еду *admin
-                p
-                  label Название
-                    br
-                    input#addTitle(name='title', type='text', value=randTitle)
-                p
-                  label Цена
-                    br
-                    input#addMoney(name='money', type='text', value="123")
-                p
-                  label Тип ( salat || first || second || garnir || other )
-                    br
-                    input#addType(name='type', type='text', value="salat")
-                p
-                  br
-                  button#addEda.btn.btn-primary(type='submit') Дoбавить блюдо
+                  tr#second(style="border: solid 1px #000")
+                    th(colspan="5") Второе
+                    each eda in edas
+                      if eda.type == "второе"
+                        tr.rowEda
+                          td
+                          td= eda.title
+                          td= eda.money
+                          td(style="text-align: center")
+                            input(name="check", type="checkbox", value=[eda.title, eda.money])
+                          if req.user.username == "admin"
+                            td(style="text-align: center")
+                              a.delEda(href="/delEda/#{eda._id}/del") X
+
+                  tr#garnir(style="border: solid 1px #000")
+                    th(colspan="5") Гарнир
+                    each eda in edas
+                      if eda.type == "гарнир"
+                        tr.rowEda
+                          td
+                          td= eda.title
+                          td= eda.money
+                          td(style="text-align: center")
+                            input(name="check", type="checkbox", value=[eda.title, eda.money])
+                          if req.user.username == "admin"
+                            td(style="text-align: center")
+                              a.delEda(href="/delEda/#{eda._id}/del") X
+
+                  tr#other(style="border: solid 1px #000")
+                    th(colspan="5") Прочее
+                    each eda in edas
+                      if eda.type == "прочее"
+                        tr.rowEda
+                          td
+                          td= eda.title
+                          td= eda.money
+                          td(style="text-align: center")
+                            input(name="check", type="checkbox", value=[eda.title, eda.money])
+                          if req.user.username == "admin"
+                            td(style="text-align: center")
+                              a.delEda(href="/delEda/#{eda._id}/del") X
+
+              button.btn.btn-primary(type='submit') Заказать
+
+
+      div#miniList.nav.nav-pills.nav-stacked( style="position: fixed;" )
+        ul(style="font-weight: bold;")
+          input#miniBtn.btn.btn-primary(type="submit", form="menuList", value="Подтвердить")
+
+        if req.user.username == "admin"
+              .container
+                div(style="background-color: #cdcdcd; width: 400px; padding: 30px; margin: 30px")
+                  form(action='/menu', method='post')
+                    h2 Добавить еду *admin
+                    p
+                      label Название
+                        br
+                        input#addTitle(name='title', type='text', value=randTitle)
+                    p
+                      label Цена
+                        br
+                        input#addMoney(name='money', type='text', value="123")
+                    p
+                      label Тип ( salat || first || second || garnir || other )
+                        br
+                        input#addType(name='type', type='text', value="salat")
+                    p
+                      br
+                      button#addEda.btn.btn-primary(type='submit') Дoбавить блюдо

@@ -17,21 +17,20 @@ exports.index = (req, res) ->
 #
 # add order
 #
-
 exports.add = (req, res) ->
-  #console.log(req.body)
-  table = req.body.table
-  username = req.body.username
+#  table = req.body.table
+  username = req.user.name + ' ' + req.user.name
   dish = req.body.dish
   quantity = req.body.quantity
-  time = req.body.time
-  #console.log('Param: ', table, username, dish, quantity, time)
+  time = new Date()
+
   order = new Order
-    table: table
+#    table: table
     username: username
     dish: dish
     quantity: quantity
     time: time
+
   order.save (err) ->
     unless err
       res.redirect '/order'

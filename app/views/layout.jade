@@ -39,7 +39,8 @@ html(lang='en')
           
             if req.user
               div.navbar-text.pull-right.dropdown.userMenu
-                a(type="button", role="button", class="dropdown-toggle marL", data-toggle="dropdown", href="#") #{req.user.username}
+                a(type="button", role="button", class="dropdown-toggle marL", data-toggle="dropdown", href="#") #{req.user.name}
+                a#logout.label.label-important(tabindex='-1', href='/logout', style="padding: 10px") Выйти
                 ul.dropdown-menu.pull-right( role='menu', aria-labelledby='dropdownMenu')
                   if req.user._id
                     li
@@ -58,7 +59,7 @@ html(lang='en')
                   li
                     a(tabindex='-1', href='/logout') Выйти
               p.navbar-text.pull-right
-                | Welcome,
+                | Добро пожаловать,
             else
               p.navbar-text.pull-right
                 a(href='/login')  Войти

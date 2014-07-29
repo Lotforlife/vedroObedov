@@ -18,7 +18,8 @@ EdaSchema = new Schema
 
 EdaSchema.statics =
   list: (cb) ->
-    this.find()
+    this.find().sort
+      type: 1
     .exec(cb)
     return
 

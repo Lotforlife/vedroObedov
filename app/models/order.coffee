@@ -9,9 +9,9 @@ Schema = mongoose.Schema
 # Order schema
 #
 OrderSchema = new Schema
-  table:
-    type: Number
-    required: true
+#  table:
+#    type: Number
+#    required: true
   username:
     type: String
     required: true
@@ -24,9 +24,8 @@ OrderSchema = new Schema
     required: true
     #default: 1
   time:
-    type: String
-    #required: true
-    #default: Date.now
+    type: Date
+    default: Date.now
 
 OrderSchema.statics =
   list: (cb) ->

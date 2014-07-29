@@ -31,14 +31,6 @@ exports.add = (req, res) ->
         message: err.message
 
 #
-# order
-#
-exports.order = (req, res) ->
-  res.redirect '/menu'
-  console.log "dinners. order", req.body
-  console.log "dinners. order", req.user
-
-#
 # delEda
 #
 exports.delEda = (req, res) ->
