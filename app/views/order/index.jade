@@ -4,6 +4,15 @@ block title
     | Order
 block main
     //h2 Заказать
+    - d = new Date()
+    - n = d.getHours()
+    if n < 7
+        div.alert.alert-danger
+            | Заказ невозможен. Заказ обедов производится в период 07:00 - 10:00
+    else if  n >= 10
+        div.alert.alert-danger
+            | Заказ невозможен. Заказ обедов производится в период 07:00 - 10:00
+    else
     div.hero-unit
         h1 Оформление заказа
     if message != ''
@@ -17,25 +26,27 @@ block main
     ul
         li тел: 312-112
         li тел/факс: 312-480
-    table.table.table-striped
-        caption
-            | Заказ для
-            strong  Абсолют
-        tr
-            th Стол №
-            th Имя
-            th Блюдо
-            th Кол-во
-            th Время
-        each order in orders
+    div(style='margin: 0').span7
+        table(style="text-align: left").table.table-striped
+            caption
+                | Заказ для
+                strong  Абсолют
             tr
-                td= order.table
-                td= order.username
-                td= order.dish
-                td= order.quantity
-                td= order.time
-    br
-    a(href='/order/new') New Order
+                th Стол №
+                th Имя
+                th Блюдо
+                th Кол-во
+                th Время
+            each order in orders
+                tr
+                    td= order.table
+                    td= order.username
+                    td= order.dish
+                    td= order.quantity
+                    td= order.time
+        br
+        if req.user.username == "admin"
+            a(href='/order/new')(style='color: #b94a48') New Order
     //script(
         src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
     //!= js('vendor/table')

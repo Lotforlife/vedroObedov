@@ -6165,11 +6165,10 @@ a.badge:focus {
 .marL{
   margin-left: 10px;
 }
-<<<<<<< HEAD
+
 table.table.table-striped>caption{
     text-align: left;
 }
-=======
 
 #menuTable{
     width: 800px;
@@ -6179,4 +6178,8 @@ table.table.table-striped>caption{
     text-align: center;
 }
 
->>>>>>> 608aa92c041307a639cf6a01b8b57b4180f5a4bf
+.padd{
+    padding-left: 30px;
+    padding-right: 100px;
+    w
+}

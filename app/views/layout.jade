@@ -27,7 +27,7 @@ html(lang='en')
   body
     .navbar.navbar-inverse.navbar-fixed-top
       .navbar-inner
-        .container
+        .padd
           button(type='button', class='btn btn-navbar', data-toggle='collapse', data-target='.nav-collapse')
             span.icon-bar
             span.icon-bar
@@ -71,12 +71,12 @@ html(lang='en')
                 li
                   a(href='/order/') Заказы
                 li
-                  a(href='/articles/') История заказов
+                  a(href='/histor') История
                 li
                   a(href='/bids') Заявки
                 if req.user.username == "admin"
                   li
-                    a(href="/users") Пользователи*admin
+                    a(href="/users")(style='color: #b94a48') Пользователи
 
     block content
 

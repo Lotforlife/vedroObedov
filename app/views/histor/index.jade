@@ -1,0 +1,54 @@
+extends base
+
+block title
+    | History
+block main
+    if message != ''
+        .alert.alert-notice
+            a.close(data-dismiss="alert", href="javascript:void(0)") x
+            | #{message}
+
+    div.container-fluid
+        div.row-fluid( id="blockContent")
+
+            div.span2(data-spy="scroll")
+                div(id="navTags",lass="", style="position: fixed;")
+                    ul(class="nav nav-pills nav-stacked")
+                        li
+                            a(href="#yan") Январь
+                        li
+                            a(href="#fev") Февраль
+                        li
+                            a(href="#mart") Март
+                        li
+                            a(href="#apr") Апрель
+                        li
+                            a(href="#may") Май
+                        li
+                            a(href="#iun") Июнь
+                        li
+                            a(href="#iul") Июль
+                        li
+                            a(href="#avg") Август
+                        li
+                            a(href="#sen") Сентябрь
+                        li
+                            a(href="#oct") Октябрь
+                        li
+                            a(href="#noyb") Ноябрь
+                        li
+                            a(href="#dec") Декабрь
+
+            div.span10
+                - d = new Date()
+                - n = d.getHours()
+                if n < 7
+                    div.alert.alert-danger
+                        | Заказ невозможен. Заказ обедов производится в период 07:00 - 10:00
+                else if  n >= 10
+                    div.alert.alert-danger
+                        | Заказ невозможен. Заказ обедов производится в период 07:00 - 10:00
+                else
+                div.hero-unit
+                    h1(style='text-align: left') История заказов
+                    h3 для #{req.user.username} за {req.histor.day} {req.histor.month} {req.histor.year}

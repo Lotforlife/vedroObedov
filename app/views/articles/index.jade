@@ -4,24 +4,19 @@ block title
   | List articles
 
 block content
-  
-  each article in articles
-  
-    .container
-      .row
-        .span12
-          h1=article.title
-      .row
-        .span2
-          small
-            p 
-              b Published
-              br
-              != dateShortMon(article.createdAt)
-          
-            p 
-              b Posted in
-              br
-              | #{article.tags}
-        .span10
-          != marked(article.body)
+    div.container-fluid
+        div.row-fluid
+            div.span2
+            div.span10
+                - d = new Date()
+                - n = d.getHours()
+                if n < 7
+                    div.alert.alert-danger
+                        | Заказ невозможен. Заказ обедов производится в период 07:00 - 10:00
+                else if  n >= 10
+                    div.alert.alert-danger
+                        | Заказ невозможен. Заказ обедов производится в период 07:00 - 10:00
+                else
+                div.hero-unit
+                    h1(style="color: #b94a48") Заказ обедов
+                    h2(style="text-align: center") производится в период 07:00 - 10:00

@@ -72,6 +72,15 @@ block main
                 a(href="#other") Прочее
 
         div.span10
+          - d = new Date()
+          - n = d.getHours()
+          if n < 7
+            div.alert.alert-danger
+                | Заказ невозможен. Заказ обедов производится в период 07:00 - 10:00
+          else if  n >= 10
+            div.alert.alert-danger
+                | Заказ невозможен. Заказ обедов производится в период 07:00 - 10:00
+          else
           div.hero-unit
             h1 Меню на #{dateShortMon(new Date())}
             p

@@ -86,7 +86,7 @@ module.exports = (app, passport, auth) ->
 
   # Article routes
   articles = require '../app/controllers/articles'
-  app.get '/', articles.index
+  app.get '/', articles.index                           #main page. do not delete
   app.get '/articles', articles.manage
   app.get '/articles/new', auth.requiresLogin, articles.new
   app.get '/articles/:articleId', articles.show
@@ -101,7 +101,7 @@ module.exports = (app, passport, auth) ->
 
   dinners = require '../app/controllers/dinners'
 
-  app.get '/menu', dinners.menu
+  app.get '/menu', auth.requiresLogin, dinners.menu
   app.post '/menu', auth.requiresLogin, dinners.add
   app.get '/delEda/:edaId/del', auth.requiresLogin, dinners.delEda
 
@@ -116,4 +116,10 @@ module.exports = (app, passport, auth) ->
   app.get '/order', auth.requiresLogin, orders.index
   app.post '/order/new', auth.requiresLogin, orders.add
   app.get '/order/new', auth.requiresLogin, orders.new
+
+  # Histor routes
+
+  histors = require '../app/controllers/histors'
+  app.get '/histor', auth.requiresLogin, histors.index
+
   return
