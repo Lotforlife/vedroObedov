@@ -6220,10 +6220,7 @@ body{
     border-radius: 5px;
 }
 
-.roww{
-    max-width: 25px;
-    float: right
-}
+
 
 #podtverdit{
     display: none;
