@@ -112,8 +112,6 @@ module.exports = (app, passport, auth) ->
 
   app.param 'edaId', dinners.findId
 
-
-
   # Order routes
 
   orders = require '../app/controllers/orders'
