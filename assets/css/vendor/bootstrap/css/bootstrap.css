@@ -6204,17 +6204,12 @@ table.table.table-striped>caption{
     margin-left: 25px;
 }
 
-body{
-    margin: 0;
-    padding: 0;
-}
-
 #navTags > ul > li > a{
     padding: 8px;
     border-radius: 5px;
 }
 
-.row{
+.roww{
     max-width: 25px;
     float: right
 }
