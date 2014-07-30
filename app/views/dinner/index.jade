@@ -98,12 +98,12 @@ block main
             size = arrTab.length
             itog = 0
             for i in [0...size]
-              $('#menuTable').append( "<tr><td>" + arrTab[i][0] + "</td><td id=row" + i + "money>" + arrTab[i][1]+ "</td><td><input id=row" + i + " class=row type=number name=quantity min=0 value=1></td><td class=row" + i + "stoim>" + arrTab[i][1] + "</td><td style=display:none><input name=title value=" + arrTab[i][0] + "><input class=row" + i + "stoimVal name=money value=" + arrTab[i][1] + "></td></tr>")
+              $('#menuTable').append( "<tr><td>" + arrTab[i][0] + "</td><td id=row" + i + "money>" + arrTab[i][1]+ "</td><td><input id=row" + i + " class=roww type=number name=quantity min=0 value=1></td><td class=row" + i + "stoim>" + arrTab[i][1] + "</td><td style=display:none><input name=title value=" + arrTab[i][0] + "><input class=row" + i + "stoimVal name=money value=" + arrTab[i][1] + "></td></tr>")
               itog += arrTab[i][1]
 
             $('#menuTable').append( "<tr><th colspan=3>Итого</th><th id=itog>" + itog + "</th></tr>" )
 
-            $('.row').on 'click', ->
+            $('.roww').on 'click', ->
               id = this.id
               quantity = $('#' + id ).val()
               stoim = $('#' + id + 'money').text()
