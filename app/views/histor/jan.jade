@@ -47,11 +47,12 @@ block main
                 else
                 div.hero-unit
                     h1(style='text-align: left') История заказов
-                    h3 для #{req.user.name} за все время
+                    h3 для #{req.user.name} за Январь
                     -sum = 0
                     -kum = 0
                 each histor in histors
                  if histor.username == req.user.username
+                  if histor.month == "Январь"
                     -sum += histor.total
                     -kum += histor.total-115
                 h3 Итого на сумму #{sum} С учетом компенсации #{kum}
@@ -63,12 +64,12 @@ block main
                         th Цена
                     each histor in histors
                         if histor.username == req.user.username
-
-                         tr
-                            th(colspan=2)= histor.day + ' ' +histor.month + ' ' + histor.year
+                         if histor.month == "Январь"
+                          tr
+                            th(colspan=2)= histor.day + ' ' +histor.month + ' ' + histor.year 
                             th= histor.total
-                         -i=0
-                         while i<histor.dish.length
+                          -i=0
+                          while i<histor.dish.length
                              tr
                                td= histor.dish[i]
                                td= histor.quantity[i]
