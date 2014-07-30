@@ -3,8 +3,8 @@ extends base
 block title
     | Order
 block main
-    //h2 Заказать
-    - d = new Date()
+
+  - d = new Date()
     - n = d.getHours()
     if n < 7
         div.alert.alert-danger
@@ -27,7 +27,7 @@ block main
         li тел: 312-112
         li тел/факс: 312-480
     div(style='margin: 0').span7
-        table(style="text-align: left").table.table-striped.tabor
+        table(style="text-align: left").table.table-striped.tabor#tableOrder
             caption
                 | Заказ для
                 strong  Абсолют

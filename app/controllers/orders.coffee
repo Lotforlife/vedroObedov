@@ -30,6 +30,7 @@ exports.add = (req, res) ->
     q = parseInt(req.body.money[k])
     total += q
     k++
+  quantity = req.body.quantity
   t = new Date()
   time = new Array()
   day = t.getDate()
