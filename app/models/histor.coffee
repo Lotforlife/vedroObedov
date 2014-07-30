@@ -14,11 +14,11 @@ HistorSchema = new Schema
     type: Array
     required: true
   quantity:
-    type: Number
+    type: Array
     required: true
     default: 1
   price:
-    type: Number
+    type: Array
     required: true
   total:
     type: Number
@@ -42,3 +42,23 @@ HistorSchema.statics =
     return
 
 Histor = mongoose.model 'Histor', HistorSchema
+###
+histor = new Histor({
+  username: "admin"
+  dish: ["BRUDA","EDA", "BORODA", "HOLODA"]
+  quantity: [1, 1, 2, 1]
+  price: [24, 46, 64, 11]
+  total: 157
+  day: 30
+  month: "Декабрь"
+  year: 2014
+})
+histor.save (err) ->
+    if err
+        console.log "NE OK"
+        histor:histor
+        errors: err.errors
+    else
+      console.log "OK"
+    return
+###

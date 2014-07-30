@@ -18,14 +18,22 @@ exports.index = (req, res) ->
 # add order
 #
 exports.add = (req, res) ->
-#  table = req.body.table
-  username = req.user.name + ' ' + req.user.name
-  dish = req.body.dish
-  quantity = req.body.quantity
-  time = new Date()
+  username = req.user.name
+  #dish = req.body.dish
+  dish = ['sup', 'salat', 'pelmeni']
+  #quantity = req.body.quantity
+  quantity = [ '1', '1', '1' ]
+  t = new Date()
+  time = new Array()
+  ti = t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds()
+  i = 0
+  while i < dish.length
+    time[i] = ti
+    i++
 
+  #console.log('Body ',req.body, 'Username: ', username, 'dish: ', dish, 'quantity: ', quantity, 'time: ', time )
+  console.log(time)
   order = new Order
-#    table: table
     username: username
     dish: dish
     quantity: quantity
@@ -41,7 +49,6 @@ exports.add = (req, res) ->
         errors: err.errors
         order: order
         message: err.message
-    console.log('Time: ',order.time)
   return
 
 #
@@ -51,4 +58,25 @@ exports.new = (req, res) ->
   res.render 'order/new',
     order: new Order({})
     message: ''
+  return
+
+#
+# delete Order
+#
+
+exports.delete = (req, res) ->
+  #console.log('Profile: ',req.profile)
+  order = req.profile
+  order.remove (err) ->
+    req.flash 'notice', 'Order was successfully deleted.'
+    res.redirect '/order'
+  return
+
+exports.findId = (req, res, next, id) ->
+  Order.findById(id).exec (err, order) ->
+    return next err if err
+    return next new Error 'Failed to load user' if not order
+    req.profile = order
+    next()
+    return
   return

@@ -9,23 +9,18 @@ Schema = mongoose.Schema
 # Order schema
 #
 OrderSchema = new Schema
-#  table:
-#    type: Number
-#    required: true
   username:
     type: String
-    required: true
-    #default: user.username
   dish:
     type: Array
     required: true
   quantity:
-    type: Number
+    type: Array
     required: true
-    #default: 1
   time:
-    type: Date
-    default: Date.now
+    type: Array
+  typ:
+    type: Array
 
 OrderSchema.statics =
   list: (cb) ->
