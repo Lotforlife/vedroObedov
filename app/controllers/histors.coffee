@@ -20,8 +20,8 @@ exports.index = (req, res) ->
 
 exports.add = (req, res) ->
   console.log(req.body)
-  username = req.body.username
-  dish = req.body.dish
+  username = req.user.username
+  dish = req.body.title
   quantity = req.body.quantity
   price = req.body.price
   total = req.body.total
@@ -56,7 +56,7 @@ exports.add = (req, res) ->
     year: year
   histor.save (err) ->
     unless err
-      res.redirect '/histor'
+      #res.redirect '/histor'
       console.log "success save histor"
     else
       console.log 'Err add on save', err

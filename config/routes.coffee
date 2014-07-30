@@ -113,7 +113,7 @@ module.exports = (app, passport, auth) ->
   app.param 'edaId', dinners.findId
 
   # Order routes
-
+  histors = require '../app/controllers/histors'
   orders = require '../app/controllers/orders'
   app.get '/order', auth.requiresLogin, orders.index
   app.post '/order', auth.requiresLogin, orders.add
@@ -124,7 +124,7 @@ module.exports = (app, passport, auth) ->
 
   # Histor routes
 
-  histors = require '../app/controllers/histors'
+
   app.get '/histor', auth.requiresLogin, histors.index
   app.get '/histor/01', auth.requiresLogin, histors.jan
   app.get '/histor/02', auth.requiresLogin, histors.feb

@@ -76,6 +76,9 @@ block main
                     if req.user.username == "admin"
                         td(style='color: #b94a48; text-align: center')
                             a(href="/delOrder/#{order._id}/del") X
-        br
+
+    div(style='padding-top: 20px').span3
         if req.user.username == "admin"
             a(href='/order/new' style='color: #b94a48') New Order
+            br
+            a(href='/order/delAll' style='color: #b94a48') Delete all Order

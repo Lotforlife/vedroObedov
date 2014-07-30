@@ -1,6 +1,7 @@
 mongoose = require 'mongoose'
 _ = require 'underscore'
 
+Histor = mongoose.model 'Histor'
 Order = mongoose.model 'Order'
 
 #
@@ -18,26 +19,69 @@ exports.index = (req, res) ->
 # add order
 #
 exports.add = (req, res) ->
+  console.log(req.body)
   username = req.user.name
-  #dish = req.body.dish
-  dish = ['sup', 'salat', 'pelmeni']
-  #quantity = req.body.quantity
-  quantity = [ '1', '1', '1' ]
+  dish = req.body.title
+  quantity = req.body.quantity
+  price = req.body.money
+  k = 0
+  total = 0
+  while k < req.body.money.length
+    q = parseInt(req.body.money[k])
+    total += q
+    k++
   t = new Date()
   time = new Array()
+  day = t.getDate()
+  m = new Array(
+    'Января'
+    'Февраля'
+    'Марта'
+    'Апреля'
+    'Мая'
+    'Июня'
+    'Июля'
+    'Августа'
+    'Сентября'
+    'Октября'
+    'Ноября'
+    'Декабря'
+  )
+  month = m[t.getMonth()]
+  year = t.getFullYear()
   ti = t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds()
   i = 0
   while i < dish.length
     time[i] = ti
     i++
+  console.log('Param: ', username,' | ', dish,' | ', quantity,' | ', price,' | ', total,' | ', month)
 
-  #console.log('Body ',req.body, 'Username: ', username, 'dish: ', dish, 'quantity: ', quantity, 'time: ', time )
-  console.log(time)
   order = new Order
     username: username
     dish: dish
     quantity: quantity
     time: time
+
+  histor = new Histor
+    username: username
+    dish: dish
+    quantity: quantity
+    price: price
+    total: total
+    day: day
+    month: month
+    year: year
+
+  histor.save (err) ->
+    unless err
+      #res.redirect '/histor'
+      console.log "success save histor"
+    else
+      console.log 'Err add on save', err
+      res.render 'histor/index',
+        errors: err.errors
+        histor: histor
+        message: err.message
 
   order.save (err) ->
     unless err
