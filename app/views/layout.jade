@@ -75,9 +75,10 @@ html(lang='en')
                   a(href='/histor') История
                 li
                   a(href='/bids') Заявки
-                if req.user.username == "admin"
-                  li
-                    a(href="/users")(style='color: #b94a48') Пользователи
+
+              if req.user.username == "admin"
+                li
+                  a(href="/users" style='color: #b94a48') Пользователи
 
     block content
 

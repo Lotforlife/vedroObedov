@@ -121,6 +121,8 @@ module.exports = (app, passport, auth) ->
   app.post '/order', auth.requiresLogin, orders.add
   app.post '/order/new', auth.requiresLogin, orders.add
   app.get '/order/new', auth.requiresLogin, orders.new
+  app.get '/delOrder/:orderId/del', auth.requiresLogin, orders.delete
+  app.param 'orderId', orders.findId
 
   # Histor routes
 

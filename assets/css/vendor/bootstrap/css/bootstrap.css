@@ -2004,6 +2004,7 @@ table {
 .table {
   width: 100%;
   margin-bottom: 20px;
+    vertical-align: middle;
 }
 
 .table th,
@@ -6201,4 +6202,11 @@ table.table.table-striped>caption{
 #miniList li,
 #miniBtn{
     margin-left: 25px;
+}
+
+.tabor tr>td{
+    text-align:center;
+    vertical-align: middle;
+    border: 1px solid #eeeeee;
+    padding: 0;
 }

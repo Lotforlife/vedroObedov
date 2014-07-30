@@ -35,7 +35,7 @@ exports.add = (req, res) ->
 #
 exports.delEda = (req, res) ->
   eda = req.profile
-
+  console.log(req.profile)
   eda.remove (err) ->
     req.flash 'notice', 'User ' + eda.title + ' was successfully deleted.'
     res.redirect '/menu'
