@@ -3,8 +3,8 @@ extends base
 block title
     | Order
 block main
-    //h2 Заказать
-    - d = new Date()
+
+  - d = new Date()
     - n = d.getHours()
     if n < 7
         div.alert.alert-danger
@@ -27,7 +27,7 @@ block main
         li тел: 312-112
         li тел/факс: 312-480
     div(style='margin: 0').span7
-        table(style="text-align: left").table.table-striped.tabor
+        table(style="text-align: left").table.table-striped.tabor#tableOrder
             caption
                 | Заказ для
                 strong  Абсолют
@@ -39,43 +39,45 @@ block main
                 th(style='text-align:center; vertical-align: middle') Время
                 if req.user.username == "admin"
                     th(style='color: #b94a48; text-align: center') Удалить
-            each order in orders
-                tr
-                    td= order.dish.length
-                    td= order.username
-                    - i = 0
-                    td(style='padding-top: 15px; padding-bottom: 15px')
-                        while i < order.dish.length
-                            -n = order.dish.length - 1
-                            if i != n
-                                = order.dish[i]
-                                hr
-                            else
-                                = order.dish[i]
-                            -i++
-                    - k = 0
-                    td(style='padding-top: 15px; padding-bottom: 15px')
-                        while k < order.quantity.length
-                            -m = order.quantity.length - 1
-                            if k != m
-                                = order.quantity[k]
-                                hr
-                            else
-                                = order.quantity[k]
-                            -k++
-                    - j = 0
-                    td(style='padding-top: 15px; padding-bottom: 15px')
-                        while j < order.time.length
-                            - b = order.time.length -1
-                            if j != b
-                                = order.time[j]
-                                hr
-                            else
-                                = order.time[j]
-                            -j++
-                    if req.user.username == "admin"
-                        td(style='color: #b94a48; text-align: center')
-                            a(href="/delOrder/#{order._id}/del") X
+
+                  tr
+                      td.stol= Math.ceil(orders.length / 4)
+                      each order in orders
+                        tr
+                          td= order.username
+                          - i = 0
+                          td(style='padding-top: 15px; padding-bottom: 15px')
+                              while i < order.dish.length
+                                  -n = order.dish.length - 1
+                                  if i != n
+                                      = order.dish[i]
+                                      hr
+                                  else
+                                      = order.dish[i]
+                                  -i++
+                          - k = 0
+                          td(style='padding-top: 15px; padding-bottom: 15px')
+                              while k < order.quantity.length
+                                  -m = order.quantity.length - 1
+                                  if k != m
+                                      = order.quantity[k]
+                                      hr
+                                  else
+                                      = order.quantity[k]
+                                  -k++
+                          - j = 0
+                          td(style='padding-top: 15px; padding-bottom: 15px')
+                              while j < order.time.length
+                                  - b = order.time.length -1
+                                  if j != b
+                                      = order.time[j]
+                                      hr
+                                  else
+                                      = order.time[j]
+                                  -j++
+                          if req.user.username == "admin"
+                              td(style='color: #b94a48; text-align: center')
+                                  a(href="/delOrder/#{order._id}/del") X
         br
         if req.user.username == "admin"
             a(href='/order/new' style='color: #b94a48') New Order

@@ -19,10 +19,10 @@ exports.index = (req, res) ->
 #
 exports.add = (req, res) ->
   username = req.user.name
-  #dish = req.body.dish
-  dish = ['sup', 'salat', 'pelmeni']
-  #quantity = req.body.quantity
-  quantity = [ '1', '1', '1' ]
+  dish = req.body.title
+#  dish = ['sup', 'salat', 'pelmeni']
+  quantity = req.body.quantity
+#  quantity = [ '1', '1', '1' ]
   t = new Date()
   time = new Array()
   ti = t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds()
