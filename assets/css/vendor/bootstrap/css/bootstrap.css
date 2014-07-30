@@ -6190,6 +6190,7 @@ table.table.table-striped>caption{
 #headTable th{
     text-align: center;
 }
+
 .padd{
     padding-left: 30px;
     padding-right: 100px;
@@ -6201,4 +6202,23 @@ table.table.table-striped>caption{
 #miniList li,
 #miniBtn{
     margin-left: 25px;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+#navTags > ul > li > a{
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.row{
+    max-width: 25px;
+    float: right
+}
+
+#podtverdit{
+    display: none
 }
