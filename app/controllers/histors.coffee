@@ -8,9 +8,9 @@ Histor = mongoose.model 'Histor'
 #
 exports.index = (req, res) ->
   console.log "List histor"
-  Histor.list (err, orders) ->
+  Histor.list (err, histors) ->
     res.render 'histor/index',
-      #histors: histors
+      histors: histors
       message: req.flash 'notice'
     return
 
@@ -62,6 +62,67 @@ exports.add = (req, res) ->
       console.log 'Err add on save', err
       res.render 'histor/index',
         errors: err.errors
-        #histors: histors
+        histors: histors
         message: err.message
   return
+
+exports.jan = (req, res) ->
+  Histor.list (err, histors) ->
+    res.render 'histor/jan',
+      histors: histors
+    return
+exports.feb = (req, res) ->
+  Histor.list (err, histors) ->
+    res.render 'histor/feb',
+      histors: histors
+    return
+exports.mar = (req, res) ->
+  Histor.list (err, histors) ->
+    res.render 'histor/mar',
+      histors: histors
+    return
+exports.apr = (req, res) ->
+  Histor.list (err, histors) ->
+    res.render 'histor/apr',
+      histors: histors
+    return
+exports.may = (req, res) ->
+  Histor.list (err, histors) ->
+    res.render 'histor/may',
+      histors: histors
+    return
+exports.jun = (req, res) ->
+  Histor.list (err, histors) ->
+    res.render 'histor/jun',
+      histors: histors
+    return
+exports.jul = (req, res) ->
+  Histor.list (err, histors) ->
+    res.render 'histor/jul',
+      histors: histors
+    return
+exports.aug = (req, res) ->
+  Histor.list (err, histors) ->
+    res.render 'histor/aug',
+      histors: histors
+    return
+exports.sen = (req, res) ->
+  Histor.list (err, histors) ->
+    res.render 'histor/sen',
+      histors: histors
+    return
+exports.oct = (req, res) ->
+  Histor.list (err, histors) ->
+    res.render 'histor/oct',
+      histors: histors
+    return
+exports.nov = (req, res) ->
+  Histor.list (err, histors) ->
+    res.render 'histor/nov',
+      histors: histors
+    return
+exports.dec = (req, res) ->
+  Histor.list (err, histors) ->
+    res.render 'histor/dec',
+      histors: histors
+    return

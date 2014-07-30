@@ -126,5 +126,17 @@ module.exports = (app, passport, auth) ->
 
   histors = require '../app/controllers/histors'
   app.get '/histor', auth.requiresLogin, histors.index
-
+  app.get '/histor/01', auth.requiresLogin, histors.jan
+  app.get '/histor/02', auth.requiresLogin, histors.feb
+  app.get '/histor/03', auth.requiresLogin, histors.mar
+  app.get '/histor/04', auth.requiresLogin, histors.apr
+  app.get '/histor/05', auth.requiresLogin, histors.may
+  app.get '/histor/06', auth.requiresLogin, histors.jun
+  app.get '/histor/07', auth.requiresLogin, histors.jul
+  app.get '/histor/08', auth.requiresLogin, histors.aug
+  app.get '/histor/09', auth.requiresLogin, histors.sen
+  app.get '/histor/10', auth.requiresLogin, histors.oct
+  app.get '/histor/11', auth.requiresLogin, histors.nov
+  app.get '/histor/12', auth.requiresLogin, histors.dec
+#  app.get '/histor/add', auth.requiresLogin, histors.add
   return

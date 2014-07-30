@@ -7,8 +7,7 @@ block main
   h2 Выполненные заявки
   h1
    small Система заявок создана для НАС, мы можем создавать заявки по нашим запросам/нуждам
-  if req.user.username == "admin"
-   .span8    
+  .span8    
     ul.nav.nav-tabs
      li.all 
        a(href="/bids") Активные
@@ -21,11 +20,11 @@ block main
      if req.user.username == "admin"
       li.deleted
        a(href="/bids/del") Удаленные
-   table.table.table-striped
+  table.table.table-striped
     tr
       th Статус
       th Название
-      th Удалена
+      th Исполнена
       th Пользователь
       th Комментарий
     each bidd in bidds
